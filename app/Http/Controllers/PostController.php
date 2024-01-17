@@ -46,17 +46,30 @@ class PostController extends Controller
     }
 
 
-    public function createPost(Request $request) {
+    public function createPost(Request $request) { // use request object
+
+
+        // validate
         $incomingFields = $request->validate([
             'title' =>'required',
             'body' => 'required'
         ]);
 
+        // strip_tags from fields
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
 
+        // auth
         $incomingFields['user_id'] = auth()->id();
+
+        // create
         Post::create($incomingFields);
+
+        // redirect
         return redirect('/');
     }
 }
+
+// Eloquent
+// Database
+// Auth
