@@ -30,6 +30,7 @@
     {{-- READ --}}
     <div style="border: 3px solid black;">
         <h2>All Posts</h2>
+        {{-- Loop through posts --}}
         @foreach($posts as $post)
         <div>
             <h3>{{$post['title']}} by {{$post->user->name}}</h3>
@@ -37,7 +38,8 @@
             <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
             <form action="/delete-post/{{$post->id}}" method="POST">
                 @csrf
-                @method('DELETE')
+                {{-- overrides POST verb --}}
+                @method('DELETE') 
                 <button>Delete</button>
             </form>
         </div>
@@ -45,7 +47,7 @@
     </div>
 
 
-    @else    
+    @else
     <div style="border: 3px solid black;">
         <h2>Register</h2>
         <form action="/register" method="POST">
@@ -53,7 +55,7 @@
             <input name="name" type="text" placeholder="name">
             <input name="email" type="text" placeholder="email">
             <input name="password" type="password" placeholder="password">
-            <button>Register</button>        
+            <button>Register</button>
         </form>
     </div>
     <div style="border: 3px solid black;">
@@ -62,7 +64,7 @@
             @csrf
             <input name="loginname" type="text" placeholder="name">
             <input name="loginpassword" type="password" placeholder="password">
-            <button>Log in</button>        
+            <button>Log in</button>
         </form>
     </div>
 
